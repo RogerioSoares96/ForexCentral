@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %} News {% endblock %}
+{% block content %}
+    {% if rates['rate'] != None %}
+    <h1>Currency Exchange</h1>
+    <div>
+        <table>
+            <tr>
+                {% for x, y in viewRates.items() %}
+                <th>
+                    {{ x }}
+                </th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for x, y in viewRates.items() %}
+                <td>
+                    {{ y }}
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+    <div>
+        <h1>News</h1>
+        <table>
+            <tr>
+                {% for article in articleTitles %}
+                <th>
+                    {{ article }}
+                </th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for article in articleLink %}
+                <td>
+                    <a href="{{asrticle}}">{{ article }}</a>
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+{% endblock %}

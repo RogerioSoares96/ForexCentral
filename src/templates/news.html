@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %} Stocks {% endblock %}
+{% block content %}
+<br>
+    <h1 class="text-center">News</h1>
+<br>
+<!-- Future : Create cool floating image UI -->
+<!--<div style="display: flex;">
+    {% for new in news %}
+    <div class="card" style="width: 18rem; margin: 7px 7px 7px 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        {% if new['image_url'] != none %}
+        <img src="{{ new['image_url'] }}" class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ new['title'] }}</h5>
+          <p class="card-text" style="overflow: hidden;">{% if new['description'] != none %} {{ new['description'] }} {% else %}  {% endif %}</p>
+          <a href="{{ new['link'] }}" class="btn btn-primary">Go to article</article></a>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>-->
+<div class="container text-center">
+  <div class="row row-cols-auto">
+    {% for new in news %}
+    <div class="col">    
+      <div class="card" style="width: 18rem;">
+          {% if new['image_url'] != none %}
+          <img src="{{ new['image_url'] }}" class="card-img-top" alt="...">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ new['title'] }}</h5>
+            <p class="card-text">{% if new['description'] != none %} {{ new['description'] }} {% else %}  {% endif %}</p>
+            <a href="{{ new['link'] }}" class="btn btn-primary">Go to article</article></a>
+          </div>
+      </div>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

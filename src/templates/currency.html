@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block title %} News {% endblock %}
+{% block content %}
+{% if rates['rate'] != None %}
+<div class="top-bottom-break">
+    <h3 class="container-fluid text-center">Exchange Rates</h3>
+</div>
+<div class="container text-center">
+    <div class="grid">
+    <div class="row row-cols-auto">
+    {% for x, y in viewRates.items() %}
+      <div class="col" style="margin: 10px">    
+        <!--<div style="margin-bottom: 10px;">
+            <div class="card-body">
+                <h5 class="card-title" style="margin-bottom: 10px;">{{ x }}</h5>
+                <p class="card-text">{{ y }}</p>
+            </div>
+        </div>
+      </div>-->
+      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#{{ x }}" aria-expanded="false" aria-controls="collapseExample">
+        {{ x }}
+      </button>
+      <div class="collapse" id="{{ x }}" style="margin: 3px; height: auto; width: auto;">
+        <div class="card card-body">
+            {{ y }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>  
+</div>
+{% endif %}
+<!-- Infinite Marquee -->
+<div class="marquee">
+    <div class="marquee--inner">
+      <span>
+        {% for x, y in viewRates.items() %}
+        <div class="orb">
+            <h8>{{ x }}</h8>
+            <h10>{{ y }}</h10>
+        </div>
+        {% endfor %}
+      </span>
+      <span>
+        {% for x, y in viewRates.items() %}
+        <div class="orb">
+            <h8>{{ x }}</h8>
+            <h10>{{ y }}</h10>
+        </div>
+        {% endfor %}
+      </span>
+    </div>
+</div>
+  <!-- news -->
+<h1 class="text-center">News</h1>
+<div class="container text-center">
+    <div class="row row-cols-auto">
+      {% for new in news %}
+      <div class="col">    
+        <div class="card" style="width: 18rem;">
+            {% if new['image_url'] != none %}
+            <img src="{{ new['image_url'] }}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ new['title'] }}</h5>
+              <p class="card-text">{% if new['description'] != none %} {{ new['description'] }} {% else %}  {% endif %}</p>
+              <a href="{{ new['link'] }}" class="btn btn-primary">Go to article</article></a>
+            </div>
+        </div>
+        <br>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}

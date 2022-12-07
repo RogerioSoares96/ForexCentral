@@ -2,43 +2,59 @@
 {% block title %} News {% endblock %}
 {% block content %}
     {% if rates['rate'] != None %}
-    <h1>Currency Exchange</h1>
+    <h3 class="container-fluid text-center">Currency Exchange</h3>
     <div>
-        <table>
+        <table class="table">
             <tr>
                 {% for x, y in viewRates.items() %}
-                <th>
-                    {{ x }}
-                </th>
+                <th>{{ x }}</th>
                 {% endfor %}
             </tr>
             <tr>
                 {% for x, y in viewRates.items() %}
-                <td>
-                    {{ y }}
-                </td>
+                <td>{{ y }}</td>
                 {% endfor %}
             </tr>
         </table>
     </div>
     {% endif %}
     <div>
-        <h1>News</h1>
-        <table>
-            <tr>
-                {% for article in articleTitles %}
-                <th>
-                    {{ article }}
-                </th>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for article in articleLink %}
-                <td>
-                    <a href="{{asrticle}}">{{ article }}</a>
-                </td>
-                {% endfor %}
-            </tr>
-        </table>
+    <!-- Trying slider-->
+    <div class="slider">
+        <div class="slide-track">
+            {% for x, y in viewRates.items() %}
+            <div class="slide">
+                <h4>{{ x }}</h4>
+                <h7>{{ y }}</h7>
+            </div>
+            {% endfor %}
+            {% for x, y in viewRates.items() %}
+            <div class="slide">
+                <h4>{{ x }}</h4>
+                <h7>{{ y }}</h7>
+            </div>
+            {% endfor %}
+        </div>
     </div>
+    <!--News Part-->
+        <h1 class="text-center">News</h1>
+        <div class="container text-center">
+            <div class="row row-cols-auto">
+              {% for new in news %}
+              <div class="col">    
+                <div class="card" style="width: 18rem;">
+                    {% if new['image_url'] != none %}
+                    <img src="{{ new['image_url'] }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                      <h5 class="card-title">{{ new['title'] }}</h5>
+                      <p class="card-text">{% if new['description'] != none %} {{ new['description'] }} {% else %}  {% endif %}</p>
+                      <a href="{{ new['link'] }}" class="btn btn-primary">Go to article</article></a>
+                    </div>
+                </div>
+                <br>
+                </div>
+                {% endfor %}
+            </div>
+          </div>
 {% endblock %}

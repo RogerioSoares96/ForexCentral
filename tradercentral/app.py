@@ -1,10 +1,11 @@
 from flask import Flask, render_template, redirect, request
 import requests
+import config
 
 
 app = Flask(__name__)
 forexAPI = 'https://www.freeforexapi.com/api/live'
-newsAPIKEY = 'pub_11972791983aeced716007f550b28902779f0'
+newsAPIKEY = config.news_api_key
 newsAPI = f'https://newsdata.io/api/1/news?apikey={newsAPIKEY}'
 
 @app.route('/', methods=['GET', 'POST'])
@@ -50,27 +51,17 @@ def currency(url):
         country = f"{url[0] + url[1]}"
     country.lower()
 
-    if requests.get(f'{newsAPI}&country={country}&category=business&language=en').json()['status'] == 'success':
-        news = requests.get(f'{newsAPI}&country={country}&category=business&language=en').json()
-        #print(news)
-        articleTitles = []
-        articleBody = []
-        articleLink = []
-        for article in news['results']:
-            if article['title'] == None:
-                articleTitles.append(None)
-            articleTitles.append(article['title'])
-            if article['content'] == None:
-                articleBody.append(None)
-            articleBody.append(article['content'])
-            if article['link'] == None:
-                articleLink.append(None)
-            articleLink.append(article['link'])
-        return render_template("currency.html",rates=rates ,viewRates=viewRates, articleBody=articleBody, articleTitles=articleTitles, articleLink=articleLink)
+    news = requests.get(f'{newsAPI}&country={country}&category=business&language=en').json()
+    if news['status'] == 'success':
+        news = news['results']
+        return render_template("currency.html",rates=rates ,viewRates=viewRates, news=news)
 
-    if  requests.get(f'{newsAPI}&country={country}&category=business&language=en').json()['status'] == 'error':
+    if  news['status'] == 'error':
         return render_template("currency.html",rates=rates ,viewRates=viewRates)
 
 @app.route('/news', methods=['GET', 'POST'])
 def news():
-    return render_template('news.html')
+    news = requests.get(f'{newsAPI}&country=US&category=business&language=en').json()
+    if news['status'] == 'success':
+        news = news['results']
+    return render_template('news.html', news=news)

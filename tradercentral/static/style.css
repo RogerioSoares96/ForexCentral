@@ -1,61 +1,60 @@
-@-webkit-keyframes scroll {
-    0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-    }
-    100% {
-    -webkit-transform: translateX(calc(-250px * var(--numberOfItems)));
-    transform: translateX(calc(-250px * var(--numberOfItems)));
-    }
-    }
-    @keyframes scroll {
-    0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-    }
-    100% {
-    -webkit-transform: translateX(calc(-250px * var(--numberOfItems)));
-    transform: translateX(calc(-250px * var(--numberOfItems)));
-    }
-    }
-    .slider {
-    background: pr;
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
-    height: 100px;
-    margin: auto;
+.orb {
+    display: inline-block;
+    margin: 0 24.7px;
+    float: left;
+    transition: all .2s ease-out;
+}
+  
+.orb:hover {
+    transform: scale(1.2);
+    opacity: .5;
+    cursor: pointer;
+}
+
+.red {background:red;}
+.yellow {background:yellow;}
+.blue {background:blue;}
+.orange {background:orange;}
+.purple {background:purple;}
+.green {background:green;}
+
+.marquee {
+    height: 200px;
+    width: 800px;
+    border: 2px solid #eee;
     overflow: hidden;
+    box-sizing: border-box;
     position: relative;
-    width: auto;
-    }
-    .slider::before, .slider::after {
-    background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
-    content: "";
-    height: 100px;
+    margin: 100px auto;
+  }
+  
+.marquee--inner {
+    display: block;
+    width: 200%;
+    margin: 70px 0;
     position: absolute;
-    width: 200px;
-    z-index: 2;
-    }
-    .slider::after {
-    right: 0;
-    top: 0;
-    -webkit-transform: rotateZ(180deg);
-    transform: rotateZ(180deg);
-    }
-    .slider::before {
-    left: 0;
-    top: 0;
-    }
-    .slider .slide-track {
-    -webkit-animation: scroll 40s linear infinite;
-    animation: scroll 40s linear infinite;
-    display: flex;
-    width: calc(250px * 14);
-    }
-    .slider .slide {
-    height: 100px;
-    width: 250px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    }
+    animation: marquee 20s linear infinite;
+}
+
+.marquee--inner:hover {
+    animation-play-state: paused;
+}
+
+/*.half {
+  float: left;
+  width: 10%;
+}*/
+
+span {
+    float: left;
+    width: 50%;
+  }
+  
+@keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+}
+
+.top-bottom-break {
+    margin: 2%;
+}

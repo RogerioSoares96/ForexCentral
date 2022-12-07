@@ -40,10 +40,9 @@ def currency(url):
     urlPairs = f"{forexAPI}?pairs={emptyUrl}"
     rates = requests.get(urlPairs).json()
     viewRates = {}
-    #print(rates)
     if rates['rates'] != None:
         for x, y in rates['rates'].items():
-            viewRates[x] = y['rate']
+            viewRates[f"{x[0]}{x[1]}{x[2]}-{x[3]}{x[4]}{x[5]}"] = y['rate']
     
     if url == "EUR":
         country = "fr,de,it,nl,es"

@@ -1,4 +1,4 @@
-# TraderCentral
+# ForexCentral
 
 ### A WebApp that displays news from free News API's based on the country of the currency chosen
 ###Currency exchange rates are also displayed from free Exchange API's
